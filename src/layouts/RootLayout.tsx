@@ -2,8 +2,11 @@ import { Outlet } from 'react-router-dom';
 import { Filters } from '../components/Filters';
 import { Button } from 'primereact/button';
 import { Link } from 'react-router-dom';
+import { useShoppingCart } from '../context/ShoppingCartContext';
 
 export const RootLayout = () => {
+  const { openCart, getCartQuantity } = useShoppingCart();
+
   return (
     <div>
       <header className="px-4 flex justify-between border items-center h-16">
@@ -16,13 +19,17 @@ export const RootLayout = () => {
             Products
           </Link>
         </div>
-        <div>
+        <div className="relative">
           <Button
             icon="pi pi-shopping-cart"
             rounded
             outlined
             aria-label="Filter"
+            onClick={openCart}
           />
+          <span className="absolute bottom-0 right-0 z-10 translate-x-1/4 translate-y-1/4  w-6 h-6 rounded-full bg-red-500 flex justify-center items-center text-white">
+            {getCartQuantity()}
+          </span>
         </div>
       </header>
       <div className="flex">

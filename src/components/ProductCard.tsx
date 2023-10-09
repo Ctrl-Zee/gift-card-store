@@ -1,9 +1,17 @@
 import { Card } from 'primereact/card';
 import { Product } from '../models/product';
 import { Button } from 'primereact/button';
+import { useShoppingCart } from '../context/ShoppingCartContext';
 
 export const ProductCard = (product: Product) => {
-  const quantity = 1;
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
+  const quantity = getItemQuantity(product.id);
+
   return (
     <Card
       pt={{
@@ -12,6 +20,7 @@ export const ProductCard = (product: Product) => {
             'bg-white text-black border rounded-xl w-64 h-64 border-round-lg',
         },
         body: { className: 'p-0' },
+        content: { className: 'py-2' },
       }}
     >
       <img
@@ -20,10 +29,14 @@ export const ProductCard = (product: Product) => {
         className="w-full h-32 object-contain"
       />
       <div className="flex flex-col items-center">
-        <p className="m-0">{product.description}</p>
+        <p className="m-1 truncate">{product.description}</p>
         <div className="flex">
           {quantity === 0 ? (
-            <Button className="w-full" label="Add To Cart" />
+            <Button
+              className="w-full"
+              label="Add To Cart"
+              onClick={() => increaseCartQuantity(product)}
+            />
           ) : (
             <div className="flex flex-col items-center">
               <div className="flex justify-between items-center">
@@ -33,14 +46,16 @@ export const ProductCard = (product: Product) => {
                   text
                   size="small"
                   aria-label="minus"
+                  onClick={() => decreaseCartQuantity(product)}
                 />
-                <p className="m-0">{quantity}</p>
+                <p className="mx-2">{quantity}</p>
                 <Button
                   icon="pi pi-plus"
                   rounded
                   text
                   size="small"
                   aria-label="add"
+                  onClick={() => increaseCartQuantity(product)}
                 />
               </div>
               <Button
@@ -48,6 +63,7 @@ export const ProductCard = (product: Product) => {
                 label="Remove"
                 size="small"
                 severity="danger"
+                onClick={() => removeFromCart(product)}
               />
             </div>
           )}
