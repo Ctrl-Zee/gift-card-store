@@ -15,6 +15,7 @@ type ShoppingCartContextType = {
   getCartQuantity: () => number;
   getCartTotal: () => number;
   getItemQuantity: (id: number) => number;
+  getItemTotal: (id: number) => number;
   increaseCartQuantity: (product: Product) => void;
   decreaseCartQuantity: (product: Product) => void;
   removeFromCart: (product: Product) => void;
@@ -58,6 +59,11 @@ export const ShoppingCartProvider = ({
 
   const getItemQuantity = (id: number) => {
     return cartItems.find((item) => item.product.id === id)?.quantity ?? 0;
+  };
+
+  const getItemTotal = (id: number) => {
+    const item = cartItems.find((item) => item.product.id === id);
+    return (item?.product.cost ?? 0) * (item?.quantity ?? 0);
   };
 
   const increaseCartQuantity = (product: Product) => {
@@ -116,6 +122,7 @@ export const ShoppingCartProvider = ({
         getCartQuantity,
         getCartTotal,
         getItemQuantity,
+        getItemTotal,
         increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,

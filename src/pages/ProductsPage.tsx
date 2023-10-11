@@ -36,7 +36,7 @@ export const ProductsPage = () => {
 
   return (
     <div className="flex">
-      <aside className="w-80 border-r">
+      <aside className="w-80 border-r border-gray-400">
         <Filters
           categories={data?.categories ?? []}
           selectedCategories={selectedCategories}

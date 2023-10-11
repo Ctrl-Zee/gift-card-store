@@ -1,25 +1,50 @@
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Link } from 'react-router-dom';
 import { useShoppingCart } from '../context/ShoppingCartContext';
+import clsx from 'clsx';
 
 export const RootLayout = () => {
   const { openCart, getCartQuantity } = useShoppingCart();
 
   return (
     <div>
-      <header className="px-4 flex justify-between border-b items-center h-16">
-        <div className="text-3xl font-medium">Nexa Card</div>
+      <header className="px-4 flex justify-between border-b border-gray-400 items-center h-16">
+        <div className="text-3xl font-medium text-primary-color">Nexa Card</div>
         <div className="flex justify-between">
-          <Link className="text-xl mx-4" to="/">
+          <NavLink
+            className={({ isActive }) =>
+              clsx(
+                'text-xl mx-4',
+                isActive ? 'border-b-2 border-primary-400' : ''
+              )
+            }
+            to="/"
+          >
             Home
-          </Link>
-          <Link className="text-xl mx-4" to="products">
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              clsx(
+                'text-xl mx-4',
+                isActive ? 'border-b-2 border-primary-400' : ''
+              )
+            }
+            to="products"
+          >
             Products
-          </Link>
-          <Link className="text-xl mx-4" to="checkout">
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              clsx(
+                'text-xl mx-4',
+                isActive ? 'border-b-2 border-primary-400' : ''
+              )
+            }
+            to="checkout"
+          >
             Checkout
-          </Link>
+          </NavLink>
         </div>
         <div className="relative">
           <Button

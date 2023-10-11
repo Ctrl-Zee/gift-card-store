@@ -14,10 +14,10 @@ export const Filters = ({
 }: FiltersProps) => {
   return (
     <>
-      <div className="py-6 pl-4 text-xl border-b">
-        <span className="text-primary-500">Filter</span>
+      <div className="py-6 pl-4 text-xl border-b border-gray-400">
+        <span className="text-primary-600">Filter</span>
       </div>
-      <div>
+      <div className="p-2">
         <MultiSelect
           value={selectedCategories}
           onChange={(e) => setSelectedCategories(e.value)}
