@@ -8,16 +8,16 @@ export const RootLayout = () => {
 
   return (
     <div>
-      <header className="px-4 flex justify-between border items-center h-16">
+      <header className="px-4 flex justify-between border-b items-center h-16">
         <div className="text-3xl font-medium">Nexa Card</div>
-        <div className="flex justify-between w-48">
-          <Link className="text-xl" to="/">
+        <div className="flex justify-between">
+          <Link className="text-xl mx-4" to="/">
             Home
           </Link>
-          <Link className="text-xl" to="products">
+          <Link className="text-xl mx-4" to="products">
             Products
           </Link>
-          <Link className="text-xl" to="checkout">
+          <Link className="text-xl mx-4" to="checkout">
             Checkout
           </Link>
         </div>

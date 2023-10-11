@@ -13,16 +13,7 @@ export const ProductCard = (product: Product) => {
   const quantity = getItemQuantity(product.id);
 
   return (
-    <Card
-      pt={{
-        root: {
-          className:
-            'bg-white text-black border rounded-xl w-64 h-64 border-round-lg',
-        },
-        body: { className: 'p-0' },
-        content: { className: 'py-2' },
-      }}
-    >
+    <Card className="w-64 h-80">
       <img
         src={product.imageUrl}
         alt={product.description}
@@ -35,6 +26,7 @@ export const ProductCard = (product: Product) => {
             <Button
               className="w-full"
               label="Add To Cart"
+              size="small"
               onClick={() => increaseCartQuantity(product)}
             />
           ) : (
@@ -61,6 +53,7 @@ export const ProductCard = (product: Product) => {
               <Button
                 className="w-full"
                 label="Remove"
+                text
                 size="small"
                 severity="danger"
                 onClick={() => removeFromCart(product)}

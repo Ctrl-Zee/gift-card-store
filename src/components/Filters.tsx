@@ -14,7 +14,9 @@ export const Filters = ({
 }: FiltersProps) => {
   return (
     <>
-      <div className="py-6 pl-4 text-blue-400 text-xl border-b">Filter</div>
+      <div className="py-6 pl-4 text-xl border-b">
+        <span className="text-primary-500">Filter</span>
+      </div>
       <div>
         <MultiSelect
           value={selectedCategories}

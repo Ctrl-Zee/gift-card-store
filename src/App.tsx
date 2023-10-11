@@ -2,13 +2,15 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './lib/router/router';
 import { PrimeReactProvider } from 'primereact/api';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
-import Tailwind from 'primereact/passthrough/tailwind';
+import 'primereact/resources/themes/lara-light-teal/theme.css';
 
 function App() {
   return (
-    <PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
+    <PrimeReactProvider>
       <ShoppingCartProvider>
-        <RouterProvider router={router} />
+        <PrimeReactProvider>
+          <RouterProvider router={router} />
+        </PrimeReactProvider>
       </ShoppingCartProvider>
     </PrimeReactProvider>
   );

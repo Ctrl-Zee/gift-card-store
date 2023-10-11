@@ -36,14 +36,14 @@ export const ProductsPage = () => {
 
   return (
     <div className="flex">
-      <aside className="w-48 border-r">
+      <aside className="w-80 border-r">
         <Filters
           categories={data?.categories ?? []}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
         />
       </aside>
-      <main className="w-[calc(100vw-12rem)]">
+      <main className="w-[calc(100vw-20rem)]">
         {isLoading && <p>Loading...</p>}
         {isError && <p>Error</p>}
         {data && (
