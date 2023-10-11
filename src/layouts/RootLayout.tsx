@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import { Filters } from '../components/Filters';
 import { Button } from 'primereact/button';
 import { Link } from 'react-router-dom';
 import { useShoppingCart } from '../context/ShoppingCartContext';
@@ -15,8 +14,11 @@ export const RootLayout = () => {
           <Link className="text-xl" to="/">
             Home
           </Link>
-          <Link className="text-xl" to="Products">
+          <Link className="text-xl" to="products">
             Products
+          </Link>
+          <Link className="text-xl" to="checkout">
+            Checkout
           </Link>
         </div>
         <div className="relative">
@@ -32,13 +34,8 @@ export const RootLayout = () => {
           </span>
         </div>
       </header>
-      <div className="flex">
-        <aside className="w-48 border-r h-[calc(100vh-4rem)] ">
-          <Filters />
-        </aside>
-        <main className="w-[calc(100vw-12rem)]">
-          <Outlet />
-        </main>
+      <div>
+        <Outlet />
       </div>
     </div>
   );

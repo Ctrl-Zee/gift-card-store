@@ -1,15 +1,28 @@
-import { Checkbox } from 'primereact/checkbox';
+import { Category } from '../models/category';
+import { MultiSelect } from 'primereact/multiselect';
 
-export const Filters = () => {
+type FiltersProps = {
+  categories: Category[];
+  setSelectedCategories: (value: Category[]) => void;
+  selectedCategories: Category[] | null;
+};
+
+export const Filters = ({
+  categories,
+  setSelectedCategories,
+  selectedCategories,
+}: FiltersProps) => {
   return (
     <>
       <div className="py-6 pl-4 text-blue-400 text-xl border-b">Filter</div>
       <div>
-        <Checkbox
-          inputId="ingredient1"
-          name="filter"
-          value="filter"
-          checked={true}
+        <MultiSelect
+          value={selectedCategories}
+          onChange={(e) => setSelectedCategories(e.value)}
+          options={categories}
+          optionLabel="type"
+          placeholder="Select Cities"
+          className="!w-full"
         />
       </div>
     </>

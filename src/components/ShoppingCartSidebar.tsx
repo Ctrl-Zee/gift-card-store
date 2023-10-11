@@ -15,7 +15,6 @@ export const ShoppingCartSidebar = ({
 }: ShoppingCartSidebarProps) => {
   return (
     <Sidebar visible={isOpen} position="right" onHide={closeCart}>
-      <h2>Shopping Cart</h2>
       <div>
         <ShoppingCartList cartItems={items} />
       </div>

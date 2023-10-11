@@ -13,6 +13,7 @@ type ShoppingCartContextType = {
   openCart: () => void;
   closeCart: () => void;
   getCartQuantity: () => number;
+  getCartTotal: () => number;
   getItemQuantity: (id: number) => number;
   increaseCartQuantity: (product: Product) => void;
   decreaseCartQuantity: (product: Product) => void;
@@ -46,6 +47,13 @@ export const ShoppingCartProvider = ({
 
   const getCartQuantity = () => {
     return cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  };
+
+  const getCartTotal = () => {
+    return cartItems.reduce(
+      (acc, item) => acc + item.product.cost * item.quantity,
+      0
+    );
   };
 
   const getItemQuantity = (id: number) => {
@@ -106,6 +114,7 @@ export const ShoppingCartProvider = ({
         openCart,
         closeCart,
         getCartQuantity,
+        getCartTotal,
         getItemQuantity,
         increaseCartQuantity,
         decreaseCartQuantity,
@@ -114,6 +123,7 @@ export const ShoppingCartProvider = ({
       }}
     >
       {children}
+      {/* could be moved to a layout component */}
       <ShoppingCartSidebar
         isOpen={isOpen}
         closeCart={closeCart}
