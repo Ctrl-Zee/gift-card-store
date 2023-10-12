@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { Product } from '../models/product';
+import { persist } from 'zustand/middleware';
 
 type ShoppingCart = {
   items: CartItem[];
@@ -83,45 +84,95 @@ const removeFromCart = (product: Product, items: CartItem[]) => {
   return items.filter((item) => item.product.id !== product.id);
 };
 
-export const useShoppingCartStore = create<ShoppingCart>((set, get) => ({
-  items: [],
-  isOpen: false,
-  getCartQuantity: () => {
-    const { items } = get();
-    return getCartQuantity(items);
-  },
-  getCartTotal: () => {
-    const { items } = get();
-    return getCartTotal(items);
-  },
-  getItem: (id: number) => {
-    const { items } = get();
-    return getItem(id, items);
-  },
-  getItemQuantity: (id: number) => {
-    const { items } = get();
-    return getItemQuantity(id, items);
-  },
-  getItemTotal: (id: number) => {
-    const { items } = get();
-    return getItemTotal(id, items);
-  },
-  increaseCartQuantity: (product: Product) => {
-    const { items } = get();
-    set({ items: increaseCartQuantity(product, items) });
-  },
-  decreaseCartQuantity: (product: Product) => {
-    const { items } = get();
-    set({ items: decreaseCartQuantity(product, items) });
-  },
-  removeFromCart: (product: Product) => {
-    const { items } = get();
-    set({ items: removeFromCart(product, items) });
-  },
-  openCart: () => {
-    set({ isOpen: true });
-  },
-  closeCart: () => {
-    set({ isOpen: false });
-  },
-}));
+export const useShoppingCartStore = create<ShoppingCart>()(
+  persist(
+    (set, get) => ({
+      items: [],
+      isOpen: false,
+      getCartQuantity: () => {
+        const { items } = get();
+        return getCartQuantity(items);
+      },
+      getCartTotal: () => {
+        const { items } = get();
+        return getCartTotal(items);
+      },
+      getItem: (id: number) => {
+        const { items } = get();
+        return getItem(id, items);
+      },
+      getItemQuantity: (id: number) => {
+        const { items } = get();
+        return getItemQuantity(id, items);
+      },
+      getItemTotal: (id: number) => {
+        const { items } = get();
+        return getItemTotal(id, items);
+      },
+      increaseCartQuantity: (product: Product) => {
+        const { items } = get();
+        set({ items: increaseCartQuantity(product, items) });
+      },
+      decreaseCartQuantity: (product: Product) => {
+        const { items } = get();
+        set({ items: decreaseCartQuantity(product, items) });
+      },
+      removeFromCart: (product: Product) => {
+        const { items } = get();
+        set({ items: removeFromCart(product, items) });
+      },
+      openCart: () => {
+        set({ isOpen: true });
+      },
+      closeCart: () => {
+        set({ isOpen: false });
+      },
+    }),
+    {
+      name: 'storage',
+    }
+  )
+);
+
+// export const useShoppingCartStore = create<ShoppingCart>((set, get) => ({
+//   items: [],
+//   isOpen: false,
+//   getCartQuantity: () => {
+//     const { items } = get();
+//     return getCartQuantity(items);
+//   },
+//   getCartTotal: () => {
+//     const { items } = get();
+//     return getCartTotal(items);
+//   },
+//   getItem: (id: number) => {
+//     const { items } = get();
+//     return getItem(id, items);
+//   },
+//   getItemQuantity: (id: number) => {
+//     const { items } = get();
+//     return getItemQuantity(id, items);
+//   },
+//   getItemTotal: (id: number) => {
+//     const { items } = get();
+//     return getItemTotal(id, items);
+//   },
+//   increaseCartQuantity: (product: Product) => {
+//     const { items } = get();
+//     set({ items: increaseCartQuantity(product, items) });
+//   },
+//   decreaseCartQuantity: (product: Product) => {
+//     const { items } = get();
+//     set({ items: decreaseCartQuantity(product, items) });
+//   },
+//   removeFromCart: (product: Product) => {
+//     const { items } = get();
+//     set({ items: removeFromCart(product, items) });
+//   },
+//   openCart: () => {
+//     set({ isOpen: true });
+//   },
+//   closeCart: () => {
+//     set({ isOpen: false });
+//   },
+// }));
