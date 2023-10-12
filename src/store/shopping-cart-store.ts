@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { Product } from '../models/product';
-import { CartItems } from '../models/order';
 
 type ShoppingCartContextType = {
   items: CartItem[];
@@ -75,44 +74,46 @@ const removeFromCart = (product: Product, items: CartItem[]) => {
   return items.filter((item) => item.product.id !== product.id);
 };
 
-const useShoppingCartStore = create<ShoppingCartContextType>((set, get) => ({
-  items: [],
-  isOpen: false,
-  getCartQuantity: () => {
-    const { items } = get();
-    return getCartQuantity(items);
-  },
-  getCartTotal: () => {
-    const { items } = get();
-    return getCartTotal(items);
-  },
-  getItemQuantity: (id: number) => {
-    const { items } = get();
-    return getItemQuantity(id, items);
-  },
-  getItemTotal: (id: number) => {
-    const { items } = get();
-    return getItemTotal(id, items);
-  },
-  increaseCartQuantity: (product: Product) => {
-    const { items } = get();
-    set({ items: increaseCartQuantity(product, items) });
-  },
-  decreaseCartQuantity: (product: Product) => {
-    const { items } = get();
-    set({ items: decreaseCartQuantity(product, items) });
-  },
-  removeFromCart: (product: Product) => {
-    const { items } = get();
-    set({ items: removeFromCart(product, items) });
-  },
-  getCartItems: () => {
-    return get().items;
-  },
-  openCart: () => {
-    return set({ isOpen: true });
-  },
-  closeCart: () => {
-    return set({ isOpen: false });
-  },
-}));
+export const useShoppingCartStore = create<ShoppingCartContextType>(
+  (set, get) => ({
+    items: [],
+    isOpen: false,
+    getCartQuantity: () => {
+      const { items } = get();
+      return getCartQuantity(items);
+    },
+    getCartTotal: () => {
+      const { items } = get();
+      return getCartTotal(items);
+    },
+    getItemQuantity: (id: number) => {
+      const { items } = get();
+      return getItemQuantity(id, items);
+    },
+    getItemTotal: (id: number) => {
+      const { items } = get();
+      return getItemTotal(id, items);
+    },
+    increaseCartQuantity: (product: Product) => {
+      const { items } = get();
+      set({ items: increaseCartQuantity(product, items) });
+    },
+    decreaseCartQuantity: (product: Product) => {
+      const { items } = get();
+      set({ items: decreaseCartQuantity(product, items) });
+    },
+    removeFromCart: (product: Product) => {
+      const { items } = get();
+      set({ items: removeFromCart(product, items) });
+    },
+    getCartItems: () => {
+      return get().items;
+    },
+    openCart: () => {
+      return set({ isOpen: true });
+    },
+    closeCart: () => {
+      return set({ isOpen: false });
+    },
+  })
+);
