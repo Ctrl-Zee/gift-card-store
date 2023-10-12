@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Button } from 'primereact/button';
-import { Link } from 'react-router-dom';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 import clsx from 'clsx';
 
