@@ -1,17 +1,22 @@
 import { Card } from 'primereact/card';
 import { Product } from '../models/product';
 import { Button } from 'primereact/button';
-import { useShoppingCart } from '../context/ShoppingCartContext';
+import { useShoppingCartStore } from '../store/shopping-cart-store';
 
 export const ProductCard = (product: Product) => {
-  const {
-    getItemQuantity,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    getItemTotal,
-  } = useShoppingCart();
+  const increaseCartQuantity = useShoppingCartStore(
+    (state) => state.increaseCartQuantity
+  );
 
-  const quantity = getItemQuantity(product.id);
+  const decreaseCartQuantity = useShoppingCartStore(
+    (state) => state.decreaseCartQuantity
+  );
+
+  const getItemTotal = useShoppingCartStore((state) => state.getItemTotal);
+
+  const quantity = useShoppingCartStore((state) =>
+    state.getItemQuantity(product.id)
+  );
 
   return (
     <Card className="w-64 h-72">

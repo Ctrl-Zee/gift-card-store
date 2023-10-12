@@ -1,18 +1,20 @@
 import { Button } from 'primereact/button';
-import { CartItem } from '../context/ShoppingCartContext';
-import { useShoppingCart } from '../context/ShoppingCartContext';
+import { CartItem, useShoppingCartStore } from '../store/shopping-cart-store';
 
 type ShoppingCartListProps = {
   cartItems: CartItem[];
 };
 
 export const ShoppingCartList = ({ cartItems }: ShoppingCartListProps) => {
-  const {
-    getCartTotal,
-    removeFromCart,
-    decreaseCartQuantity,
-    increaseCartQuantity,
-  } = useShoppingCart();
+  const getCartTotal = useShoppingCartStore((state) => state.getCartTotal);
+  const removeFromCart = useShoppingCartStore((state) => state.removeFromCart);
+  const increaseCartQuantity = useShoppingCartStore(
+    (state) => state.increaseCartQuantity
+  );
+  const decreaseCartQuantity = useShoppingCartStore(
+    (state) => state.decreaseCartQuantity
+  );
+
   return (
     <>
       <div>

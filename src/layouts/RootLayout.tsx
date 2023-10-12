@@ -1,10 +1,17 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Button } from 'primereact/button';
-import { useShoppingCart } from '../context/ShoppingCartContext';
 import clsx from 'clsx';
+import { ShoppingCartSidebar } from '../components/ShoppingCartSidebar';
+import { useShoppingCartStore } from '../store/shopping-cart-store';
 
 export const RootLayout = () => {
-  const { openCart, getCartQuantity } = useShoppingCart();
+  const openCart = useShoppingCartStore((state) => state.openCart);
+  const closeCart = useShoppingCartStore((state) => state.closeCart);
+  const getCartQuantity = useShoppingCartStore(
+    (state) => state.getCartQuantity
+  );
+  const isOpen = useShoppingCartStore((state) => state.isOpen);
+  const cartItems = useShoppingCartStore((state) => state.items);
 
   return (
     <div>
@@ -61,6 +68,11 @@ export const RootLayout = () => {
       <div>
         <Outlet />
       </div>
+      <ShoppingCartSidebar
+        isOpen={isOpen}
+        closeCart={closeCart}
+        items={cartItems}
+      />
     </div>
   );
 };
