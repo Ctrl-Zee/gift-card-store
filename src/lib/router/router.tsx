@@ -1,9 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { RootLayout } from '../../layouts/RootLayout';
-import { ErrorPage } from '../../pages/ErrorPage';
-import { ProductsPage } from '../../pages/ProductsPage';
-import { HomePage } from '../../pages/HomePage';
-import { CheckoutPage } from '../../pages/CheckoutPage';
+import { lazy } from 'react';
+
+const ProductsPage = lazy(() => import('../../pages/ProductsPage'));
+const ErrorPage = lazy(() => import('../../pages/ErrorPage'));
+const HomePage = lazy(() => import('../../pages/HomePage'));
+const CheckoutPage = lazy(() => import('../../pages/CheckoutPage'));
 
 export const router = createBrowserRouter([
   {

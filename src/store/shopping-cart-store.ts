@@ -22,10 +22,20 @@ export type CartItem = {
   quantity: number;
 };
 
+/**
+ * Get the total quantity of items in the cart
+ * @param items
+ * @returns
+ */
 const getCartQuantity = (items: CartItem[]) => {
   return items.reduce((acc, item) => acc + item.quantity, 0);
 };
 
+/**
+ * Get the total cost of items in the cart
+ * @param items
+ * @returns
+ */
 const getCartTotal = (items: CartItem[]) => {
   return items.reduce(
     (acc, item) => acc + item.product.cost * item.quantity,
@@ -33,19 +43,43 @@ const getCartTotal = (items: CartItem[]) => {
   );
 };
 
+/**
+ * Get a cart item by id
+ * @param id
+ * @param items
+ * @returns
+ */
 const getItem = (id: number, items: CartItem[]) => {
   return items.find((item) => item.product.id === id);
 };
 
+/**
+ * Get the quantity of a cart item by id
+ * @param id
+ * @param items
+ * @returns
+ */
 const getItemQuantity = (id: number, items: CartItem[]) => {
   return items.find((item) => item.product.id === id)?.quantity ?? 0;
 };
 
+/**
+ * Get the total cost of a cart item by id
+ * @param id
+ * @param items
+ * @returns
+ */
 const getItemTotal = (id: number, items: CartItem[]) => {
   const item = items.find((item) => item.product.id === id);
   return (item?.product.cost ?? 0) * (item?.quantity ?? 0);
 };
 
+/**
+ * Increase the quantity of a cart item
+ * @param product
+ * @param items
+ * @returns
+ */
 const increaseCartQuantity = (product: Product, items: CartItem[]) => {
   if (items.find((item) => item.product.id === product.id) == null) {
     const test = [...items, { product: product, quantity: 1 }]; // item not in cart: add item with quantity 1
@@ -66,6 +100,12 @@ const increaseCartQuantity = (product: Product, items: CartItem[]) => {
   }
 };
 
+/**
+ * Decrease the quantity of a cart item
+ * @param product
+ * @param items
+ * @returns
+ */
 const decreaseCartQuantity = (product: Product, items: CartItem[]) => {
   if (items.find((item) => item.product.id === product.id)?.quantity === 1) {
     return items.filter((item) => item.product.id !== product.id); // remove item from cart
@@ -80,10 +120,19 @@ const decreaseCartQuantity = (product: Product, items: CartItem[]) => {
   }
 };
 
+/**
+ * Remove an item from the cart
+ * @param product
+ * @param items
+ * @returns
+ */
 const removeFromCart = (product: Product, items: CartItem[]) => {
   return items.filter((item) => item.product.id !== product.id);
 };
 
+/**
+ * Zustand store for the shopping cart
+ */
 export const useShoppingCartStore = create<ShoppingCart>()(
   persist(
     (set, get) => ({

@@ -3,6 +3,8 @@ import { Button } from 'primereact/button';
 import clsx from 'clsx';
 import { ShoppingCartSidebar } from '../components/ShoppingCartSidebar';
 import { useShoppingCartStore } from '../store/shopping-cart-store';
+import { Suspense } from 'react';
+import { Loading } from '../components/Loading';
 
 export const RootLayout = () => {
   const openCart = useShoppingCartStore((state) => state.openCart);
@@ -66,7 +68,9 @@ export const RootLayout = () => {
         </div>
       </header>
       <div>
-        <Outlet />
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
       </div>
       <ShoppingCartSidebar
         isOpen={isOpen}

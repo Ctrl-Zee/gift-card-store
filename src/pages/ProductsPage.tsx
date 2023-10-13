@@ -8,7 +8,7 @@ import { Category } from '../models/category';
 import { Product } from '../models/product';
 
 export const ProductsPage = () => {
-  const { data, isLoading, isError } = useGet<ProductSummary>('Catalog');
+  const { data } = useGet<ProductSummary>('Catalog');
   const [searchValue, setSearchValue] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<
     Category[] | null
@@ -44,8 +44,8 @@ export const ProductsPage = () => {
         />
       </aside>
       <main className="w-[calc(100vw-20rem)]">
-        {isLoading && <p>Loading...</p>}
-        {isError && <p>Error</p>}
+        {/* {isLoading && <p>Loading...</p>}
+        {isError && <p>Error</p>} */}
         {data && (
           <>
             <div className="p-4">
@@ -70,3 +70,5 @@ export const ProductsPage = () => {
     </div>
   );
 };
+
+export default ProductsPage;
