@@ -6,9 +6,7 @@ import 'primereact/resources/themes/lara-light-teal/theme.css';
 function App() {
   return (
     <PrimeReactProvider>
-      <PrimeReactProvider>
-        <RouterProvider router={router} />
-      </PrimeReactProvider>
+      <RouterProvider router={router} />
     </PrimeReactProvider>
   );
 }

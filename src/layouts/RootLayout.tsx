@@ -18,7 +18,9 @@ export const RootLayout = () => {
   return (
     <div>
       <header className="px-4 flex justify-between border-b border-gray-400 items-center h-16">
-        <div className="text-3xl font-medium text-primary-color">Nexa Card</div>
+        <div className="text-3xl font-medium bg-gradient-to-r from-primary-400 to-blue-500 bg-clip-text text-transparent">
+          Nexa Card
+        </div>
         <div className="flex justify-between">
           <NavLink
             className={({ isActive }) =>

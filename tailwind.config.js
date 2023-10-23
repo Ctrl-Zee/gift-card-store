@@ -168,6 +168,14 @@ export default {
       'primary-800': '#0b655b',
       'primary-900': '#084a42',
     },
+    extend: {
+      backgroundImage: {
+        'hero-img-1': "url('./public/images/hero-img.jpg')",
+        'hero-img-2': "url('./public/images/hero-img-2.jpg')",
+        'hero-img-3': "url('./public/images/hero-img-3.jpg')",
+        'hero-img-4': "url('./public/images/hero-img-4.jpg')",
+      },
+    },
   },
   plugins: [],
   jit: true,
